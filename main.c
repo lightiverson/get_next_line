@@ -27,30 +27,25 @@ int main(void)
 	{
 		if (strchr(buf, '\n'))
 		{
-			return (0);
+			char *c = strchr(buf, '\n');
+			int index = (int)(c - buf);
+
+			char *last_block_before_nl = ft_substr(buf, 0, index + 1);
+			s = ft_strjoin(s, last_block_before_nl);
+			ft_putstr_fd(s, 1);
+			return(0);
 		}
-		// write(1, "\nIteratie\n", 11);
-		// write(1, buf, n);
-		// write(1, "\n\n", 2);
-		// strlcat
-		// if buf contains newline?
-		// alles tot newline moet in string, en alles na newline moet in static var
 		
-		// s = malloc(strlen(buf) * sizeof(*s));
-		s = ft_strdup(buf);
-		printf("\ns = %s\n", s);
+		// als er een newline is gevonden
+		// dan moet je s concaten met buf[tot newline]
+		// dus er moet een nieuwe array zijn vanaf buf[0] tot en met buf[index newline]
+			// hoe krijg je de index terug van char in string? Door strchr - buf te doen, en int van te maken.
+			// hoe krijg je een substring terug van index tot index? ft_substr(buf, 0, index + 1).
+			// hoe kan ik dit testen? bij die return in de if statement moet s 1 regel zijn.
+
+		// ft_putstr_fd(buf, 1);
+		s = ft_strjoin(s, buf);
 	}
+	ft_putstr_fd(s, 1);
 	return (0);
 }
-
-/*
-Wat als buf[BUFFER_SIZE] kleiner is dan buf[t/m newline]?
-	Vul char* s met characters van buf[BUFFER_SIZE]
-	Maar je moet doorgaan tot je newline tegenkomt?
-
-	while(tot je newline tegenkomt)
-
-	
-
-Wat als buf[BUFFER_SIZE] groter is dan buf[t/m newline]?
-*/

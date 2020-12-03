@@ -1,5 +1,63 @@
 #include "get_next_line.h"
 
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t			i;
+	unsigned char	*new_ptr;
+
+	i = 0;
+	new_ptr = b;
+	while (i < len)
+	{
+		new_ptr[i] = (unsigned char)c;
+		i++;
+	}
+	return (b);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, '\0', n);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*res;
+	unsigned int	end;
+	int				i;
+
+	if (!s)
+		return (NULL);
+	end = start + len;
+	res = malloc(len + 1);
+	i = 0;
+	if (res == NULL)
+		return (NULL);
+	if (start >= ft_strlen(s))
+	{
+		ft_bzero(res, 1);
+		return (res);
+	}
+	while (start < end)
+	{
+		res[i] = s[start];
+		start++;
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t s_len;
+
+	if (!s)
+		return ;
+	s_len = ft_strlen(s);
+	write(fd, s, s_len);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	clen;
