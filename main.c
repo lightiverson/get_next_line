@@ -7,47 +7,59 @@ int get_next_line(int fd, char **line)
 	int		n;
 	char	buf[BUFFER_SIZE];
 	char	**tda;
-	char	*temp;
-	int		flag;
+	static 	char *temp;
+	static	int flag;
+	int 	index_newline;
+	char 	*alles_voor_newline;
 
 	flag = 0;
 	while ((n = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		tda = ft_split(buf, '\n');
-
-		/*
-		if(flag) // als in de vorige iteratie een newline is gevonden.
+		if (flag)
 		{
+			ft_putstr_fd("*line = ", 1);
+			ft_putstr_fd(*line, 1);
+			write(1, "\n", 1);
 			*line = bzero(*line, strlen(*line));
 			*line = ft_strjoin(*line, temp);
 			temp = bzero(temp, strlen(temp));
 			flag = 0;
 		}
-
-		if (tda[1][0] == '\0') // als er geen newline is gevonden.
+		
+		if (strchr(buf, '\n')) // Als newline gevonden is.
 		{
-			*line = ft_strjoin(*line, buf); // zet *line gelijk aan de hele buf.
-		}
-		else { // als er wel een newline is gevonden.
-			*line = ft_strjoin(*line, tda[0]); // zet *line gelijk aan (buf tot newline).
-			temp = ft_strjoin(temp, tda[1]); // zet temp gelijk aan (buf van na newline tot eind).
+			index_newline = (int)(strchr(buf, '\n') - buf);
+			// ft_putstr_fd("index_newline = ", 1);
+			// char c = index_newline + '0';
+			// write(1, &c, 1);
+			// write(1, "\n", 1);
+
+			alles_voor_newline = ft_substr(buf, 0, index_newline);
+			// ft_putstr_fd("alles_voor_newline = ", 1);
+			// ft_putstr_fd(alles_voor_newline, 1);
+			// write(1, "\n", 1);
+
+			*line = ft_strjoin(*line, alles_voor_newline);
+			// ft_putstr_fd("*line = ", 1);
+			// ft_putstr_fd(*line, 1);
+			// write(1, "\n", 1);
+
+			temp = ft_substr(buf, (index_newline + 1), strlen(buf));
+			// ft_putstr_fd("temp = ", 1);
+			// ft_putstr_fd(temp, 1);
+			// write(1, "\n", 1);
+
 			flag = 1;
 		}
-		*/
-
-		ft_putstr_fd("tda[0] = ", 1);
-		ft_putstr_fd(tda[0], 1);
-		write(1, "\n", 1);
-
-		ft_putstr_fd("tda[1] = ", 1);
-		ft_putstr_fd(tda[1], 1);
-		write(1, "\n", 1);
-
-		write(1, "\n", 1);
-
-		*line = ft_strjoin(*line, buf);
+		else
+		{
+			*line = ft_strjoin(*line, buf);
+			// ft_putstr_fd("*line = ", 1);
+			// ft_putstr_fd(*line, 1);
+			// write(1, "\n", 1);	
+		}
 	}
-	return(0);
+	return (0);
 }
 
 int	main(void)
@@ -61,8 +73,15 @@ int	main(void)
 	while (ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		printf("\nret = %d\nline = %s\n", ret, line);
-		free(line); // waarom?
+		// ft_putstr_fd("ret = ", 1);
+		// char c = ret + '0';
+		// write(1, &c, 1);
+		// write(1, "\n", 1);
+		// ft_putstr_fd("line = ", 1);
+		// ft_putstr_fd(line, 1);
+		// write(1, "\n", 1);
+		// write(1, "\n", 1);
+		// free(line); // waarom?
 	}
 	close(fd);
 	return (0);
