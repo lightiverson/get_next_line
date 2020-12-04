@@ -14,65 +14,21 @@ int get_next_line(int fd, char **line)
 	flag = 0;
 	while ((n = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		// tda = ft_split(buf, '\n');
+		tda = ft_split(buf, '\n');
 
-		// ft_putstr_fd("tda[0] = ", 1);
-		// ft_putstr_fd(tda[0], 1);
-		// write(1, "\n", 1);
-		// ft_putstr_fd("strlen(tda[0]) = ", 1);
-		// char c = strlen(tda[0]) + '0';
-		// write(1, &c, 1);
-		// write(1, "\n", 1);
-		// ft_putstr_fd("tda[1] = ", 1);
-		// ft_putstr_fd(tda[1], 1);
-		// write(1, "\n", 1);
-		// write(1, "\n", 1);
+		ft_putstr_fd("tda[0] = ", 1);
+		ft_putstr_fd(tda[0], 1);
+		write(1, "\n", 1);
+		ft_putstr_fd("strlen(tda[0]) = ", 1);
+		char c = strlen(tda[0]) + '0';
+		write(1, &c, 1);
+		write(1, "\n", 1);
+		ft_putstr_fd("tda[1] = ", 1);
+		ft_putstr_fd(tda[1], 1);
+		write(1, "\n", 1);
+		write(1, "\n", 1);
 
-		if (flag)
-		{
-			ft_putstr_fd("*line = ", 1);
-			ft_putstr_fd(*line, 1);
-			write(1, "\n", 1);
 
-			*line = bzero(*line, strlen(*line));
-			*line = ft_strjoin(*line, temp);
-			temp = bzero(temp, strlen(temp));
-			flag = 0;
-		}
-		
-		if (strchr(buf, '\n')) // Als newline gevonden is.
-		{
-			index_newline = (int)(strchr(buf, '\n') - buf);
-			// ft_putstr_fd("index_newline = ", 1);
-			// char c = index_newline + '0';
-			// write(1, &c, 1);
-			// write(1, "\n", 1);
-
-			char *alles_voor_newline = ft_substr(buf, 0, index_newline);
-			// ft_putstr_fd("alles_voor_newline = ", 1);
-			// ft_putstr_fd(alles_voor_newline, 1);
-			// write(1, "\n", 1);
-
-			*line = ft_strjoin(*line, alles_voor_newline);
-			// ft_putstr_fd("*line = ", 1);
-			// ft_putstr_fd(*line, 1);
-			// write(1, "\n", 1);
-
-			temp = ft_substr(buf, (index_newline + 1), strlen(buf));
-			// ft_putstr_fd("temp = ", 1);
-			// ft_putstr_fd(temp, 1);
-			// write(1, "\n", 1);
-
-			flag = 1;
-		}
-		else
-		{
-			*line = ft_strjoin(*line, buf);
-			// ft_putstr_fd("*line = ", 1);
-			// ft_putstr_fd(*line, 1);
-			// write(1, "\n", 1);
-		}
-		
 		
 		
 		/*
