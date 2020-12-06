@@ -51,7 +51,7 @@ int get_next_line(int fd, char **line)
 
 			flag = 1;
 		}
-		else
+		else // Als er geen newline is gevonden.
 		{
 			*line = ft_strjoin(*line, buf);
 			// ft_putstr_fd("*line = ", 1);

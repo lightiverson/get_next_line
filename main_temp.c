@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-#define BUFFER_SIZE 3
+// #define BUFFER_SIZE 5
 
 int get_next_line(int fd, char **line)
 {
@@ -14,6 +14,9 @@ int get_next_line(int fd, char **line)
 
 	while ((n = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
+		// ft_putstr_fd("iteratie", 1);
+		// write(1, "\n", 1);
+
 		// ft_putstr_fd("iteratie", 1);
 		// write(1, "\n", 1);
 		if (temp != NULL)
@@ -63,6 +66,7 @@ int get_next_line(int fd, char **line)
 			return (1);
 		}
 	}
+	// *line = bzero(*line, strlen(*line));
 	return (0);
 }
 

@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-#define BUFFER_SIZE 3
+#define BUFFER_SIZE 140
 
 int get_next_line(int fd, char **line)
 {
@@ -19,12 +19,11 @@ int get_next_line(int fd, char **line)
 		ft_putstr_fd("tda[0] = ", 1);
 		ft_putstr_fd(tda[0], 1);
 		write(1, "\n", 1);
-		ft_putstr_fd("strlen(tda[0]) = ", 1);
-		char c = strlen(tda[0]) + '0';
-		write(1, &c, 1);
-		write(1, "\n", 1);
 		ft_putstr_fd("tda[1] = ", 1);
 		ft_putstr_fd(tda[1], 1);
+		write(1, "\n", 1);
+		ft_putstr_fd("tda[2] = ", 1);
+		ft_putstr_fd(tda[2], 1);
 		write(1, "\n", 1);
 		write(1, "\n", 1);
 
@@ -57,7 +56,7 @@ int get_next_line(int fd, char **line)
 		{
 			// ft_putstr_fd("geen newline gevonden", 1);
 			// write(1, "\n", 1);
-			*line = ft_strjoin(*line, buf); // zet *line gelijk aan de hele buf.
+			*line = ft_strjoin(*line, tda[0]); // zet *line gelijk aan de hele buf.
 		}
 		*/
 	
