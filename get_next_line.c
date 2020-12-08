@@ -21,7 +21,7 @@ int get_next_line(int fd, char **line)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || line == NULL)
 	{
-		printf("One of fd, BUFFER_SIZE and line is wrong, return -1\n");
+		// printf("One of fd, BUFFER_SIZE and line is wrong, return -1\n");
 		return (-1);
 	}
 	
@@ -136,14 +136,15 @@ int	main(void)
 	int		fd;
 	int		ret;
 
-	fd = open("tester.txt", O_RDONLY, 0);
+	fd = open("tester.txt", O_RDONLY);
 	ret = 1;
+	line = NULL;
 	while (ret > 0)
 	{
 		ret = get_next_line(fd, &line);
 
 		// printf("\nret = %d\n", ret);
-		printf("%s\n", line);
+		// printf("%s\n", line);
 		// ft_putstr_fd("line = ", 1);
 		// ft_putstr_fd(line, 1);
 		// ft_putstr_fd("\n", 1);
