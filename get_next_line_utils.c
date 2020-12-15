@@ -1,5 +1,32 @@
 #include "get_next_line.h"
 
+char	*c_ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	clen;
+	char	*ret;
+
+	if (!s1 && !s2)
+		return (NULL);
+	else if (!s1)
+	{
+		free((char *)s1);
+		return (ft_strdup(s2));
+	}
+	else if (!s2)
+	{
+		free((char *)s1);
+		return (ft_strdup(s1));
+	}
+	clen = ft_strlen(s1) + ft_strlen(s2);
+	ret = malloc(clen + 1);
+	if (!ret)
+		return (NULL);
+	ft_strlcpy(ret, s1, clen + 1);
+	ft_strlcat(ret, s2, clen + 1);
+	free((char *)s1);
+	return (ret);
+}
+
 void	*ft_memset(void *b, int c, size_t len)
 {
 	size_t			i;

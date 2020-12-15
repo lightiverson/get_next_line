@@ -7,8 +7,6 @@ int get_next_line(int fd, char **line)
 	static char buff[BUFFER_SIZE + 1];
 	static char *ptr_a;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || line == NULL)
-		return (-1);
 	n = 1; // Moet op 1 staan om de while loop te laten lopen.
 	*line = calloc(1, sizeof(*(*line))); // Calloc *line zodat later met strjoin, argument s1 gefree'ed kan worden.
 
