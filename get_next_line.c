@@ -3,7 +3,7 @@
 int get_next_line(int fd, char **line)
 {
 	//printf("\n>>> Running get_next_line()\n");
-	static int n;
+	int n;
 	static char buff[BUFFER_SIZE + 1];
 	static char *ptr_a;
 
@@ -63,22 +63,22 @@ int get_next_line(int fd, char **line)
 	return (0);
 }
 
-int	main(void)
-{
-	char	*line;
-	int		fd;
-	int		ret;
+// int	main(void)
+// {
+// 	char	*line;
+// 	int		fd;
+// 	int		ret;
 
-	fd = open("test", O_RDONLY);
-	ret = 1;
-	line = NULL;
-	while (ret > 0)
-	{
-		ret = get_next_line(fd, &line);
-		//printf("\nret = %d\n", ret);
-		printf("line = |%s|\n", line);
-		free(line); // waarom?
-	}
-	close(fd);
-	return (0);
-}
+// 	fd = open("test", O_RDONLY);
+// 	ret = 1;
+// 	line = NULL;
+// 	while (ret > 0)
+// 	{
+// 		ret = get_next_line(fd, &line);
+// 		//printf("\nret = %d\n", ret);
+// 		printf("line = |%s|\n", line);
+// 		free(line); // waarom?
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
