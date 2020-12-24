@@ -6,40 +6,26 @@
 /*   By: kawish <kawish@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/19 16:20:18 by kawish        #+#    #+#                 */
-/*   Updated: 2020/12/19 16:46:10 by kawish        ########   odam.nl         */
+/*   Updated: 2020/12/24 12:38:15 by kawish        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
-** je moet checken of buff leeg is
-** als buff leeg is moet je readen
-** nadat je geread hebt is buff niet meer leeg
-** maar het kan ook dat er een volgende iteratie is waar buff nog niet leeg is
-** dan hoef je niet te readen
-** maar wel nog steeds voor newline checken
-** dus of je nou read of niet, je moet sowieso voor newline checken.
-*/
-
-int	get_next_line(int fd, char **line)
+int	helper(int fd, char *buff, char **line)
 {
-	int			n;
-	static char	buff[BUFFER_SIZE + 1];
-	static char	*ptr_a;
+	int		n;
+	char	*ptr_a;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || line == NULL)
-		return (-1);
 	n = 1;
-	*line = ft_calloc(1, sizeof(*(*line)));
 	while (n)
 	{
 		if (*buff == '\0')
 		{
 			n = read(fd, buff, BUFFER_SIZE);
-			buff[n] = '\0';
 			if (n < 0)
 				return (-1);
+			buff[n] = '\0';
 		}
 		if ((ptr_a = ft_strchr(buff, '\n')))
 		{
@@ -49,9 +35,21 @@ int	get_next_line(int fd, char **line)
 			ft_memmove(buff, ptr_a, (ft_strlen(ptr_a) + 1));
 			return (1);
 		}
-		else
-			*line = c_ft_strjoin(*line, buff);
-		ft_bzero(buff, sizeof(buff));
+		*line = c_ft_strjoin(*line, buff);
+		ft_memset(buff, '\0', ft_strlen(buff) + 1);
 	}
 	return (0);
+}
+
+int	get_next_line(int fd, char **line)
+{
+	static char	buff[BUFFER_SIZE + 1];
+
+	if (BUFFER_SIZE <= 0 || fd < 0 || line == NULL)
+		return (-1);
+	*line = malloc(1 * sizeof(*(*line)));
+	if (*line == NULL)
+		return (-1);
+	ft_memset(*line, '\0', 1 * sizeof(*(*line)));
+	return (helper(fd, buff, line));
 }

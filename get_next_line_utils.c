@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   get_next_line_utils.c                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kawish <kawish@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/12/22 10:40:36 by kawish        #+#    #+#                 */
+/*   Updated: 2020/12/22 21:42:45 by kawish        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	void	*a;
+	size_t			i;
+	unsigned char	*new_ptr;
 
-	if ((count == 0) || (size == 0))
+	i = 0;
+	new_ptr = b;
+	while (i < len)
 	{
-		count = 1;
-		size = 1;
+		new_ptr[i] = (unsigned char)c;
+		i++;
 	}
-	a = malloc(count * size);
-	if (a)
-		ft_bzero(a, count * size);
-	return (a);
+	return (b);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -31,31 +43,24 @@ char	*ft_strchr(const char *s, int c)
 	return (((char *)&(s[i])));
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (!dst && !src)
-		return (0);
-	while (i < n)
-	{
-		((char *)dst)[i] = ((const char *)src)[i];
-		i++;
-	}
-	return (dst);
-}
-
-char	*ft_strdup(const char *s1)
+char	*c_ft_strdup(const char *s1)
 {
 	size_t	s1_len;
 	char	*res;
+	size_t	i;
 
 	s1_len = ft_strlen(s1) + 1;
 	res = malloc(s1_len * sizeof(*res));
 	if (!res)
 		return (NULL);
-	ft_memcpy(res, s1, s1_len);
+	i = 0;
+	if (!res && !s1)
+		return (0);
+	while (i < s1_len)
+	{
+		((char *)res)[i] = ((const char *)s1)[i];
+		i++;
+	}
 	return (res);
 }
 
@@ -117,12 +122,12 @@ char	*c_ft_strjoin(char const *s1, char const *s2)
 	else if (!s1)
 	{
 		free((char *)s1);
-		return (ft_strdup(s2));
+		return (c_ft_strdup(s2));
 	}
 	else if (!s2)
 	{
 		free((char *)s1);
-		return (ft_strdup(s1));
+		return (c_ft_strdup(s1));
 	}
 	clen = ft_strlen(s1) + ft_strlen(s2);
 	ret = malloc(clen + 1);
@@ -173,24 +178,4 @@ size_t	ft_strlen(const char *s)
 		len++;
 	}
 	return (len);
-}
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t			i;
-	unsigned char	*new_ptr;
-
-	i = 0;
-	new_ptr = b;
-	while (i < len)
-	{
-		new_ptr[i] = (unsigned char)c;
-		i++;
-	}
-	return (b);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, '\0', n);
 }
