@@ -1,17 +1,26 @@
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   get_next_line.h                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kawish <kawish@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/12/24 13:17:14 by kawish        #+#    #+#                 */
+/*   Updated: 2020/12/25 10:12:54 by kawish        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <fcntl.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	*ft_memset(void *b, int c, size_t len);
-char	*ft_strchr(const char *s, int c);
-char	*c_ft_strjoin(char const *s1, char const *s2);
-void	*ft_memmove(void *dst, const void *src, size_t len);
-size_t	ft_strlen(const char *s);
-int		get_next_line(int fd, char **line);
+# include <unistd.h>
+# include <stdlib.h>
+
+void			*ft_memmove(void *dst, const void *src, size_t len);
+size_t			ft_strlen(const char *s);
+char			*c_ft_strdup(const char *s1);
+size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
+int				get_next_line(int fd, char **line);
 
 #endif

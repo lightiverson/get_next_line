@@ -6,41 +6,51 @@
 /*   By: kawish <kawish@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/22 10:40:36 by kawish        #+#    #+#                 */
-/*   Updated: 2020/12/22 21:42:45 by kawish        ########   odam.nl         */
+/*   Updated: 2020/12/24 12:54:06 by kawish        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
+	char			*d;
+	const char		*s;
 	size_t			i;
-	unsigned char	*new_ptr;
+	char			*d_last;
+	const char		*s_last;
 
-	i = 0;
-	new_ptr = b;
-	while (i < len)
+	d = dst;
+	s = src;
+	if (!dst && !src)
+		return (0);
+	if (d < s)
+		while (len--)
+			*d++ = *s++;
+	else
 	{
-		new_ptr[i] = (unsigned char)c;
-		i++;
+		i = 0;
+		d_last = d + (len - 1);
+		s_last = s + (len - 1);
+		while (i < len)
+		{
+			*(d_last - i) = *(s_last - i);
+			i++;
+		}
 	}
-	return (b);
+	return (dst);
 }
 
-char	*ft_strchr(const char *s, int c)
+size_t	ft_strlen(const char *s)
 {
-	int i;
+	size_t len;
 
-	i = 0;
-	while (s[i] != (char)c)
+	len = 0;
+	while (*s++)
 	{
-		if (s[i] == '\0')
-		{
-			return (0);
-		}
-		i++;
+		len++;
 	}
-	return (((char *)&(s[i])));
+	return (len);
 }
 
 char	*c_ft_strdup(const char *s1)
@@ -110,72 +120,4 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		return (dst_len_o + ft_strlen(src));
 	}
 	return (dstsize + ft_strlen(src));
-}
-
-char	*c_ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	clen;
-	char	*ret;
-
-	if (!s1 && !s2)
-		return (NULL);
-	else if (!s1)
-	{
-		free((char *)s1);
-		return (c_ft_strdup(s2));
-	}
-	else if (!s2)
-	{
-		free((char *)s1);
-		return (c_ft_strdup(s1));
-	}
-	clen = ft_strlen(s1) + ft_strlen(s2);
-	ret = malloc(clen + 1);
-	if (!ret)
-		return (NULL);
-	ft_strlcpy(ret, s1, clen + 1);
-	ft_strlcat(ret, s2, clen + 1);
-	free((char *)s1);
-	return (ret);
-}
-
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	char			*d;
-	const char		*s;
-	size_t			i;
-	char			*d_last;
-	const char		*s_last;
-
-	d = dst;
-	s = src;
-	if (!dst && !src)
-		return (0);
-	if (d < s)
-		while (len--)
-			*d++ = *s++;
-	else
-	{
-		i = 0;
-		d_last = d + (len - 1);
-		s_last = s + (len - 1);
-		while (i < len)
-		{
-			*(d_last - i) = *(s_last - i);
-			i++;
-		}
-	}
-	return (dst);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t len;
-
-	len = 0;
-	while (*s++)
-	{
-		len++;
-	}
-	return (len);
 }
