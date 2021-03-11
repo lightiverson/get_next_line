@@ -1,5 +1,5 @@
 # Get Next Line
-A function that returns a line ending with a newline, read from a fle descriptor.
+A function that returns a line ending with a newline, read from a file descriptor.
 
 This project covers an interesting concept in C programming: static variables.
 
