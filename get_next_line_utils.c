@@ -6,7 +6,7 @@
 /*   By: kawish <kawish@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/22 10:40:36 by kawish        #+#    #+#                 */
-/*   Updated: 2020/12/24 12:54:06 by kawish        ########   odam.nl         */
+/*   Updated: 2021/10/12 12:24:53 by kgajadie      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 size_t	ft_strlen(const char *s)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (*s++)

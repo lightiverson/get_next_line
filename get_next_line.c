@@ -6,7 +6,7 @@
 /*   By: kawish <kawish@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/19 16:20:18 by kawish        #+#    #+#                 */
-/*   Updated: 2020/12/25 10:04:50 by kawish        ########   odam.nl         */
+/*   Updated: 2021/10/12 12:23:35 by kgajadie      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static	void	*ft_memset(void *b, int c, size_t len)
 
 static	char	*ft_strchr(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != (char)c)
@@ -70,7 +70,7 @@ static	char	*c_ft_strjoin(char const *s1, char const *s2)
 	return (ret);
 }
 
-static	int		helper(int fd, char *buff, char **line)
+static	int	helper(int fd, char *buff, char **line)
 {
 	int		n;
 	char	*ptr_a;
@@ -85,11 +85,11 @@ static	int		helper(int fd, char *buff, char **line)
 				return (-1);
 			buff[n] = '\0';
 		}
-		if ((ptr_a = ft_strchr(buff, '\n')))
+		if (ft_strchr(buff, '\n'))
 		{
-			*ptr_a = '\0';
+			ptr_a = ft_strchr(buff, '\n');
+			*ptr_a++ = '\0';
 			*line = c_ft_strjoin(*line, buff);
-			ptr_a++;
 			ft_memmove(buff, ptr_a, (ft_strlen(ptr_a) + 1));
 			return (1);
 		}
@@ -99,7 +99,7 @@ static	int		helper(int fd, char *buff, char **line)
 	return (0);
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	buff[BUFFER_SIZE + 1];
 
